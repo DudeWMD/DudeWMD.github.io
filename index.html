@@ -3,14 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Lost Dog Emergency Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    iframe {
+      border: none;
+      width: 100%;
+      height: 800px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Lost Dog Emergency Plan</h1>
-  <p>Please fill out this form to get your custom action plan.</p>
+  <div class="container">
+    <h1>Lost Dog Emergency Plan</h1>
+    <p>Take a deep breath. You've got a plan now. Fill out this quick form to get your custom action plan emailed to you within seconds.</p>
 
-  <iframe data-tally-src="https://tally.so/embed/woaADM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-          loading="lazy" width="100%" height="2" frameborder="0" marginheight="0" marginwidth="0" 
-          title="Take a Deep Breath. You've Got a Plan Now."></iframe>
+    <iframe data-tally-src="https://tally.so/embed/woaADM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            title="Lost Dog Form">
+    </iframe>
+  </div>
 
   <script>
     var d = document,
