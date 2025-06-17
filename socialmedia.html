@@ -15,7 +15,6 @@
       margin: 0;
       padding: 0;
     }
-
     h1 {
       text-align: center;
       margin: 30px 0 40px 0;
@@ -23,16 +22,14 @@
       letter-spacing: 2px;
       color: #fff;
     }
-
     .social-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 32px;
       max-width: 1000px;
       margin: 0 auto;
       padding: 0 20px 40px 20px;
     }
-
     .social-box {
       background: #232628;
       border-radius: 18px;
@@ -50,44 +47,64 @@
     .social-icon {
       font-size: 2.8rem;
       margin-bottom: 16px;
-      color: #1da1f2; /* Default icon color, override per type if needed */
     }
-    .social-title {
-      font-size: 1.3rem;
-      font-weight: 500;
-      margin-bottom: 10px;
-      color: #f5f5f7;
-      letter-spacing: 0.5px;
-    }
-    .social-username {
-      font-size: 1rem;
-      color: #aab2bd;
-      margin-bottom: 12px;
-    }
-    .social-link {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 7px 18px;
-      background: #282c34;
-      color: #1da1f2;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.15s, color 0.15s;
-    }
-    .social-link:hover {
-      background: #1da1f2;
-      color: #181a1b;
-    }
-
-    /* Example per-social custom icon color */
-    .github .social-icon { color: #fff; }
     .twitter .social-icon { color: #1da1f2; }
     .facebook .social-icon { color: #1877f3; }
     .instagram .social-icon { color: #e4405f; }
-    .linkedin .social-icon { color: #0a66c2; }
-
+    .nextdoor .social-icon { color: #00b246; }
+    .craigslist .social-icon { color: #660099; }
+    .platform-btn {
+      background: #282c34;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 18px;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .platform-btn:hover {
+      background: #1da1f2;
+      color: #181a1b;
+    }
+    .post-container {
+      background: #181a1b;
+      border-radius: 8px;
+      padding: 18px 14px;
+      margin: 10px 0;
+      width: 100%;
+      position: relative;
+    }
+    .post-text {
+      color: #f0f0f0;
+      font-size: 1.05rem;
+      font-family: inherit;
+      white-space: pre-line;
+      margin-bottom: 8px;
+      word-break: break-word;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #232628;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 3px 12px;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .copy-btn:hover {
+      background: #1da1f2;
+      color: #181a1b;
+    }
     @media (max-width: 700px) {
       .social-grid {
         grid-template-columns: 1fr;
@@ -101,73 +118,93 @@
 </head>
 <body>
   <h1>Customer Social Media</h1>
-  <div class="social-grid" id="socialGrid">
-    <!-- Example Social Media Box, will be dynamically generated -->
-    <div class="social-box github" id="githubBox">
-      <i class="fab fa-github social-icon"></i>
-      <div class="social-title">GitHub</div>
-      <div class="social-username" id="githubUsername">@username</div>
-      <a href="#" target="_blank" class="social-link" id="githubLink">View Profile</a>
-    </div>
+  <div class="social-grid">
+    <!-- Twitter -->
     <div class="social-box twitter" id="twitterBox">
-      <i class="fab fa-twitter social-icon"></i>
-      <div class="social-title">Twitter</div>
-      <div class="social-username" id="twitterUsername">@username</div>
-      <a href="#" target="_blank" class="social-link" id="twitterLink">View Profile</a>
+      <button class="platform-btn" onclick="window.open('https://twitter.com/intent/tweet', '_blank')">
+        <i class="fab fa-twitter social-icon"></i>Post to Twitter
+      </button>
+      <div class="post-container">
+        <div class="post-text" id="twitterPost">
+          Your Twitter-ready post will appear here.
+        </div>
+        <button class="copy-btn" onclick="copyPost('twitterPost', this)">Copy</button>
+      </div>
     </div>
+    <!-- Facebook -->
     <div class="social-box facebook" id="facebookBox">
-      <i class="fab fa-facebook social-icon"></i>
-      <div class="social-title">Facebook</div>
-      <div class="social-username" id="facebookUsername">Name</div>
-      <a href="#" target="_blank" class="social-link" id="facebookLink">View Profile</a>
+      <button class="platform-btn" onclick="window.open('https://facebook.com/', '_blank')">
+        <i class="fab fa-facebook social-icon"></i>Post to Facebook
+      </button>
+      <div class="post-container">
+        <div class="post-text" id="facebookPost">
+          Your Facebook-ready post will appear here.
+        </div>
+        <button class="copy-btn" onclick="copyPost('facebookPost', this)">Copy</button>
+      </div>
     </div>
+    <!-- Instagram -->
     <div class="social-box instagram" id="instagramBox">
-      <i class="fab fa-instagram social-icon"></i>
-      <div class="social-title">Instagram</div>
-      <div class="social-username" id="instagramUsername">@username</div>
-      <a href="#" target="_blank" class="social-link" id="instagramLink">View Profile</a>
+      <button class="platform-btn" onclick="window.open('https://instagram.com/', '_blank')">
+        <i class="fab fa-instagram social-icon"></i>Post to Instagram
+      </button>
+      <div class="post-container">
+        <div class="post-text" id="instagramPost">
+          Your Instagram-ready post will appear here.
+        </div>
+        <button class="copy-btn" onclick="copyPost('instagramPost', this)">Copy</button>
+      </div>
     </div>
-    <div class="social-box linkedin" id="linkedinBox">
-      <i class="fab fa-linkedin social-icon"></i>
-      <div class="social-title">LinkedIn</div>
-      <div class="social-username" id="linkedinUsername">Full Name</div>
-      <a href="#" target="_blank" class="social-link" id="linkedinLink">View Profile</a>
+    <!-- Nextdoor -->
+    <div class="social-box nextdoor" id="nextdoorBox">
+      <button class="platform-btn" onclick="window.open('https://nextdoor.com/', '_blank')">
+        <i class="fa-solid fa-house-chimney social-icon"></i>Post to Nextdoor
+      </button>
+      <div class="post-container">
+        <div class="post-text" id="nextdoorPost">
+          Your Nextdoor-ready post will appear here.
+        </div>
+        <button class="copy-btn" onclick="copyPost('nextdoorPost', this)">Copy</button>
+      </div>
     </div>
-    <!-- Add more platforms as needed -->
+    <!-- Craigslist -->
+    <div class="social-box craigslist" id="craigslistBox">
+      <button class="platform-btn" onclick="window.open('https://craigslist.org/', '_blank')">
+        <i class="fa-solid fa-c"></i>Post to Craigslist
+      </button>
+      <div class="post-container">
+        <div class="post-text" id="craigslistPost">
+          Your Craigslist-ready post will appear here.
+        </div>
+        <button class="copy-btn" onclick="copyPost('craigslistPost', this)">Copy</button>
+      </div>
+    </div>
   </div>
-
-  <!-- Placeholder for your dynamic JS population -->
   <script>
-    // Example: dynamically populate social data for a customer
-    // This could be replaced by your actual logic to fetch and fill in customer data
-    const customerData = {
-      github: { username: "johndoe", url: "https://github.com/johndoe" },
-      twitter: { username: "john_doe", url: "https://twitter.com/john_doe" },
-      facebook: { username: "John Doe", url: "https://facebook.com/johndoe" },
-      instagram: { username: "john.doe", url: "https://instagram.com/john.doe" },
-      linkedin: { username: "John Doe", url: "https://linkedin.com/in/johndoe" }
+    // Copy function for all platforms
+    function copyPost(postId, btn) {
+      const text = document.getElementById(postId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = original; }, 1200);
+      });
+    }
+
+    // Example: dynamically fill in posts (replace with your logic)
+    const customerPosts = {
+      twitter: "Check out my business for the best deals in town! #LocalBusiness",
+      facebook: "Excited to share my services with the neighborhood! Contact me for more info.",
+      instagram: "Proud to offer top quality and friendly service. DM me for details!",
+      nextdoor: "Hi neighbors! I'm offering services in our area. Message me for details.",
+      craigslist: "Affordable and reliable services available now. Reach out today!"
     };
 
-    if (customerData.github) {
-      document.getElementById("githubUsername").textContent = "@" + customerData.github.username;
-      document.getElementById("githubLink").href = customerData.github.url;
-    }
-    if (customerData.twitter) {
-      document.getElementById("twitterUsername").textContent = "@" + customerData.twitter.username;
-      document.getElementById("twitterLink").href = customerData.twitter.url;
-    }
-    if (customerData.facebook) {
-      document.getElementById("facebookUsername").textContent = customerData.facebook.username;
-      document.getElementById("facebookLink").href = customerData.facebook.url;
-    }
-    if (customerData.instagram) {
-      document.getElementById("instagramUsername").textContent = "@" + customerData.instagram.username;
-      document.getElementById("instagramLink").href = customerData.instagram.url;
-    }
-    if (customerData.linkedin) {
-      document.getElementById("linkedinUsername").textContent = customerData.linkedin.username;
-      document.getElementById("linkedinLink").href = customerData.linkedin.url;
-    }
+    document.getElementById("twitterPost").textContent = customerPosts.twitter;
+    document.getElementById("facebookPost").textContent = customerPosts.facebook;
+    document.getElementById("instagramPost").textContent = customerPosts.instagram;
+    document.getElementById("nextdoorPost").textContent = customerPosts.nextdoor;
+    document.getElementById("craigslistPost").textContent = customerPosts.craigslist;
   </script>
 </body>
 </html>
