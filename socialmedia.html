@@ -1,125 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lost Dog Social Media Toolkit</title>
+  <meta charset="UTF-8">
+  <title>Customer Social Media</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: #f5f5f5;
+      background: #181a1b;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
     }
 
-    h1, h2 {
-      color: #222;
+    h1 {
+      text-align: center;
+      margin: 30px 0 40px 0;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #fff;
     }
 
-    .post-block {
-      background: white;
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 40px 20px;
     }
 
-    .post-text {
-      background: #eee;
-      padding: 0.5rem;
-      white-space: pre-wrap;
-      border-radius: 5px;
-      font-family: monospace;
-      margin-top: 0.5rem;
-      position: relative;
+    .social-box {
+      background: #232628;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      padding: 36px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.12s, box-shadow 0.12s;
     }
-
-    .copy-btn {
-      background-color: #007BFF;
-      color: white;
+    .social-box:hover {
+      transform: translateY(-4px) scale(1.025);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    }
+    .social-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      color: #1da1f2; /* Default icon color, override per type if needed */
+    }
+    .social-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #f5f5f7;
+      letter-spacing: 0.5px;
+    }
+    .social-username {
+      font-size: 1rem;
+      color: #aab2bd;
+      margin-bottom: 12px;
+    }
+    .social-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 7px 18px;
+      background: #282c34;
+      color: #1da1f2;
       border: none;
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 0.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .social-link:hover {
+      background: #1da1f2;
+      color: #181a1b;
     }
 
-    .copy-btn:hover {
-      background-color: #0056b3;
+    /* Example per-social custom icon color */
+    .github .social-icon { color: #fff; }
+    .twitter .social-icon { color: #1da1f2; }
+    .facebook .social-icon { color: #1877f3; }
+    .instagram .social-icon { color: #e4405f; }
+    .linkedin .social-icon { color: #0a66c2; }
+
+    @media (max-width: 700px) {
+      .social-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+      .social-box {
+        padding: 26px 14px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <h1>📣 Share to Help Find <span id="dogNameTitle">Your Dog</span></h1>
-  <p>Copy and paste these posts to help get the word out fast!</p>
-
-  <div class="post-block">
-    <h2>Facebook / Nextdoor</h2>
-    <div class="post-text" id="fbPost"></div>
-    <button class="copy-btn" onclick="copyText('fbPost')">Copy</button>
+  <h1>Customer Social Media</h1>
+  <div class="social-grid" id="socialGrid">
+    <!-- Example Social Media Box, will be dynamically generated -->
+    <div class="social-box github" id="githubBox">
+      <i class="fab fa-github social-icon"></i>
+      <div class="social-title">GitHub</div>
+      <div class="social-username" id="githubUsername">@username</div>
+      <a href="#" target="_blank" class="social-link" id="githubLink">View Profile</a>
+    </div>
+    <div class="social-box twitter" id="twitterBox">
+      <i class="fab fa-twitter social-icon"></i>
+      <div class="social-title">Twitter</div>
+      <div class="social-username" id="twitterUsername">@username</div>
+      <a href="#" target="_blank" class="social-link" id="twitterLink">View Profile</a>
+    </div>
+    <div class="social-box facebook" id="facebookBox">
+      <i class="fab fa-facebook social-icon"></i>
+      <div class="social-title">Facebook</div>
+      <div class="social-username" id="facebookUsername">Name</div>
+      <a href="#" target="_blank" class="social-link" id="facebookLink">View Profile</a>
+    </div>
+    <div class="social-box instagram" id="instagramBox">
+      <i class="fab fa-instagram social-icon"></i>
+      <div class="social-title">Instagram</div>
+      <div class="social-username" id="instagramUsername">@username</div>
+      <a href="#" target="_blank" class="social-link" id="instagramLink">View Profile</a>
+    </div>
+    <div class="social-box linkedin" id="linkedinBox">
+      <i class="fab fa-linkedin social-icon"></i>
+      <div class="social-title">LinkedIn</div>
+      <div class="social-username" id="linkedinUsername">Full Name</div>
+      <a href="#" target="_blank" class="social-link" id="linkedinLink">View Profile</a>
+    </div>
+    <!-- Add more platforms as needed -->
   </div>
 
-  <div class="post-block">
-    <h2>Instagram Caption</h2>
-    <div class="post-text" id="igPost"></div>
-    <button class="copy-btn" onclick="copyText('igPost')">Copy</button>
-  </div>
-
-  <div class="post-block">
-    <h2>Reddit Post</h2>
-    <div class="post-text" id="redditPost"></div>
-    <button class="copy-btn" onclick="copyText('redditPost')">Copy</button>
-  </div>
-
-  <div class="post-block">
-    <h2>Twitter / X</h2>
-    <div class="post-text" id="twPost"></div>
-    <button class="copy-btn" onclick="copyText('twPost')">Copy</button>
-  </div>
-
+  <!-- Placeholder for your dynamic JS population -->
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const dogName = params.get("dogName") || "my dog";
-    const breed = params.get("breed") || "unknown breed";
-    const location = params.get("location") || "unknown location";
-    const date = params.get("date") || "recently";
-    const weight = params.get("weight") || "unknown";
+    // Example: dynamically populate social data for a customer
+    // This could be replaced by your actual logic to fetch and fill in customer data
+    const customerData = {
+      github: { username: "johndoe", url: "https://github.com/johndoe" },
+      twitter: { username: "john_doe", url: "https://twitter.com/john_doe" },
+      facebook: { username: "John Doe", url: "https://facebook.com/johndoe" },
+      instagram: { username: "john.doe", url: "https://instagram.com/john.doe" },
+      linkedin: { username: "John Doe", url: "https://linkedin.com/in/johndoe" }
+    };
 
-    document.getElementById("dogNameTitle").textContent = dogName;
-
-    const fb = `🚨 LOST DOG: ${dogName}
-Breed: ${breed}
-Weight: ${weight} lbs
-Last seen near ${location} on ${date}.
-Friendly but may be scared. Please call if seen! 🐶`;
-
-    const ig = `🆘 LOST DOG ALERT 🐾
-Name: ${dogName}
-Breed: ${breed}
-Weight: ${weight} lbs
-Last seen in ${location} on ${date}.
-Please help us bring ${dogName} home 💔`;
-
-    const reddit = `My dog ${dogName} went missing near ${location} on ${date}. ${dogName} is a ${breed}, weighs around ${weight} lbs, and may be frightened. We're heartbroken and just want our pup home. Please let me know if you see anything. Thank you so much. 🙏`;
-
-    const tw = `🚨 LOST DOG ALERT 🚨
-Name: ${dogName}
-Breed: ${breed}
-Last seen: ${location} on ${date}
-Please share and help bring ${dogName} home 🐾`;
-
-    document.getElementById("fbPost").textContent = fb;
-    document.getElementById("igPost").textContent = ig;
-    document.getElementById("redditPost").textContent = reddit;
-    document.getElementById("twPost").textContent = tw;
-
-    function copyText(id) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Copied to clipboard!");
-      });
+    if (customerData.github) {
+      document.getElementById("githubUsername").textContent = "@" + customerData.github.username;
+      document.getElementById("githubLink").href = customerData.github.url;
+    }
+    if (customerData.twitter) {
+      document.getElementById("twitterUsername").textContent = "@" + customerData.twitter.username;
+      document.getElementById("twitterLink").href = customerData.twitter.url;
+    }
+    if (customerData.facebook) {
+      document.getElementById("facebookUsername").textContent = customerData.facebook.username;
+      document.getElementById("facebookLink").href = customerData.facebook.url;
+    }
+    if (customerData.instagram) {
+      document.getElementById("instagramUsername").textContent = "@" + customerData.instagram.username;
+      document.getElementById("instagramLink").href = customerData.instagram.url;
+    }
+    if (customerData.linkedin) {
+      document.getElementById("linkedinUsername").textContent = customerData.linkedin.username;
+      document.getElementById("linkedinLink").href = customerData.linkedin.url;
     }
   </script>
 </body>
