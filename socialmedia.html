@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lost Dog Social Media Toolkit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #f5f5f5;
+    }
+
+    h1, h2 {
+      color: #222;
+    }
+
+    .post-block {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+
+    .post-text {
+      background: #eee;
+      padding: 0.5rem;
+      white-space: pre-wrap;
+      border-radius: 5px;
+      font-family: monospace;
+      margin-top: 0.5rem;
+      position: relative;
+    }
+
+    .copy-btn {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .copy-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📣 Share to Help Find <span id="dogNameTitle">Your Dog</span></h1>
+  <p>Copy and paste these posts to help get the word out fast!</p>
+
+  <div class="post-block">
+    <h2>Facebook / Nextdoor</h2>
+    <div class="post-text" id="fbPost"></div>
+    <button class="copy-btn" onclick="copyText('fbPost')">Copy</button>
+  </div>
+
+  <div class="post-block">
+    <h2>Instagram Caption</h2>
+    <div class="post-text" id="igPost"></div>
+    <button class="copy-btn" onclick="copyText('igPost')">Copy</button>
+  </div>
+
+  <div class="post-block">
+    <h2>Reddit Post</h2>
+    <div class="post-text" id="redditPost"></div>
+    <button class="copy-btn" onclick="copyText('redditPost')">Copy</button>
+  </div>
+
+  <div class="post-block">
+    <h2>Twitter / X</h2>
+    <div class="post-text" id="twPost"></div>
+    <button class="copy-btn" onclick="copyText('twPost')">Copy</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const dogName = params.get("dogName") || "my dog";
+    const breed = params.get("breed") || "unknown breed";
+    const location = params.get("location") || "unknown location";
+    const date = params.get("date") || "recently";
+    const weight = params.get("weight") || "unknown";
+
+    document.getElementById("dogNameTitle").textContent = dogName;
+
+    const fb = `🚨 LOST DOG: ${dogName}
+Breed: ${breed}
+Weight: ${weight} lbs
+Last seen near ${location} on ${date}.
+Friendly but may be scared. Please call if seen! 🐶`;
+
+    const ig = `🆘 LOST DOG ALERT 🐾
+Name: ${dogName}
+Breed: ${breed}
+Weight: ${weight} lbs
+Last seen in ${location} on ${date}.
+Please help us bring ${dogName} home 💔`;
+
+    const reddit = `My dog ${dogName} went missing near ${location} on ${date}. ${dogName} is a ${breed}, weighs around ${weight} lbs, and may be frightened. We're heartbroken and just want our pup home. Please let me know if you see anything. Thank you so much. 🙏`;
+
+    const tw = `🚨 LOST DOG ALERT 🚨
+Name: ${dogName}
+Breed: ${breed}
+Last seen: ${location} on ${date}
+Please share and help bring ${dogName} home 🐾`;
+
+    document.getElementById("fbPost").textContent = fb;
+    document.getElementById("igPost").textContent = ig;
+    document.getElementById("redditPost").textContent = reddit;
+    document.getElementById("twPost").textContent = tw;
+
+    function copyText(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
