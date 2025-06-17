@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You - Lost Dog Plan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    .flyer, .social-posts, .action-plan {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .code-box {
+      background: #eee;
+      padding: 0.5rem;
+      font-family: monospace;
+      white-space: pre-wrap;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Thank You! Here’s Your Lost Dog Recovery Plan</h1>
+
+  <div class="flyer">
+    <h2>📄 Lost Dog Flyer</h2>
+    <p><strong>Dog Name:</strong> <span id="flyerName"></span></p>
+    <p><strong>Breed:</strong> <span id="flyerBreed"></span></p>
+    <p><strong>Last Seen Location:</strong> <span id="flyerLocation"></span></p>
+    <p><strong>Date Last Seen:</strong> <span id="flyerDate"></span></p>
+    <p><strong>Weight:</strong> <span id="flyerWeight"></span> lbs</p>
+    <p>If seen, please call immediately! 🐾</p>
+  </div>
+
+  <div class="social-posts">
+    <h2>📣 Social Media Posts</h2>
+    <p><strong>Facebook/Nextdoor:</strong></p>
+    <div class="code-box" id="fbPost"></div>
+
+    <p><strong>Instagram:</strong></p>
+    <div class="code-box" id="igPost"></div>
+
+    <p><strong>Reddit:</strong></p>
+    <div class="code-box" id="redditPost"></div>
+  </div>
+
+  <div class="action-plan">
+    <h2>✅ Action Plan</h2>
+    <ul>
+      <li>Post on local Facebook groups and pet finder pages</li>
+      <li>Put up printed flyers in your neighborhood</li>
+      <li>Notify local shelters and vet offices</li>
+      <li>Update microchip info if applicable</li>
+      <li>Set out familiar scents: blanket, bed, etc.</li>
+    </ul>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const dogName = params.get("dogName") || "Your dog";
+    const breed = params.get("breed") || "Unknown";
+    const location = params.get("location") || "your area";
+    const date = params.get("date") || "recently";
+    const weight = params.get("weight") || "Unknown";
+
+    // Fill flyer
+    document.getElementById("flyerName").textContent = dogName;
+    document.getElementById("flyerBreed").textContent = breed;
+    document.getElementById("flyerLocation").textContent = location;
+    document.getElementById("flyerDate").textContent = date;
+    document.getElementById("flyerWeight").textContent = weight;
+
+    // Fill social posts
+    const fbPost = `
+🚨 LOST DOG: ${dogName}
+Breed: ${breed}
+Weight: ${weight} lbs
+Last seen near ${location} on ${date}.
+Friendly but may be scared. Please call if seen!
+`;
+
+    const igPost = `
+🆘 LOST DOG 🐶
+Name: ${dogName}
+Breed: ${breed}
+Last seen: ${location} on ${date}
+📞 Please help bring them home!
+`;
+
+    const redditPost = `
+My dog ${dogName}, a ${weight} lb ${breed}, went missing near ${location} on ${date}. Please let me know if you see anything — we're devastated and just want them home. Thank you 💔
+`;
+
+    document.getElementById("fbPost").textContent = fbPost;
+    document.getElementById("igPost").textContent = igPost;
+    document.getElementById("redditPost").textContent = redditPost;
+  </script>
+
+</body>
+</html>
